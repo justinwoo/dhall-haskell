@@ -89,7 +89,7 @@ before_deploy:
     then
       stack build --copy-bins --local-bin-path ./artifacts;
     else
-      docker run --mount src="$(pwd)",target=/home/ubuntu/dhall-haskell,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "cd dhall-haskell; stack build --copy-bins --local-bin-path ./artifacts"
+      docker run --mount src="$(pwd)",target=/home/ubuntu/dhall-haskell/dhall,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "cd dhall-haskell/dhall; stack build --copy-bins --local-bin-path ./artifacts"
     fi
   - cp artifacts/dhall dhall
   - tar -zcvf "${TRAVIS_OS_NAME}.tar.gz" dhall
