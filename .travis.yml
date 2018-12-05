@@ -43,7 +43,7 @@ before_install:
     
     else
       docker pull nilrecurring/haskell-lavello:lts-12
-      docker run --mount src="$(pwd)",target=/home/ubuntu/spacchetti,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "sudo chown -R ubuntu spacchetti; cd spacchetti; stack build"
+      docker run --mount src="$(pwd)",target=/home/ubuntu/dhall-haskell,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "sudo chown -R ubuntu dhall-haskell; cd dhall-haskell; stack build"
     
     fi
 
@@ -89,10 +89,10 @@ before_deploy:
     then
       stack build --copy-bins --local-bin-path ./artifacts;
     else
-      docker run --mount src="$(pwd)",target=/home/ubuntu/spacchetti,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "cd spacchetti; stack build --copy-bins --local-bin-path ./artifacts"
+      docker run --mount src="$(pwd)",target=/home/ubuntu/dhall-haskell,type=bind nilrecurring/haskell-lavello:lts-12 /bin/bash -c "cd dhall-haskell; stack build --copy-bins --local-bin-path ./artifacts"
     fi
-  - cp artifacts/spacchetti spacchetti
-  - tar -zcvf "${TRAVIS_OS_NAME}.tar.gz" spacchetti
+  - cp artifacts/dhall dhall
+  - tar -zcvf "${TRAVIS_OS_NAME}.tar.gz" dhall
 
 deploy:
   provider: releases
